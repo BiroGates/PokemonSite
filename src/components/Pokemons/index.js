@@ -1,5 +1,7 @@
 import  { styledPokemon }  from './styled'
 
+
+
 export default function ListPokemon({ pokemonImage, pokemonName, pokemonHp, pokemonAttack, pokemonDefense }){
     return (
         <styledPokemon>

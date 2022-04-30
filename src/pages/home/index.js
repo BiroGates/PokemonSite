@@ -2,7 +2,7 @@
 import { StyledHome } from './styled'
 
 //Components
-import Pokemons from '../../components/Pokemons/index'
+import ListPokemon from '../../components/Pokemons/index'
 
 // Images
 import pokedex from '../../assets/images/pokedex.jpg';
@@ -14,48 +14,26 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 // Api
-//import Api from '../../services/Api';
-import api from '../../services/Api';
-//const showPokemons = new Api();
+import Api from '../../services/Api';
+//import api from '../../services/Api';
+const showPokemons = new Api();
 
 
-
-export default function Home(){
-    
-    const [pokemonImage, setPokemonImage] = useState('');
-    const [pokemonName, setPokemonName] = useState('');
-    const [pokemonAttack, setPokemonAttack] = useState('');
-    const [pokemonHp, setPokemonHp] = useState('');
-    const [pokemonDefense, setPokemonDefense] = useState('');
-   
+export default function Home(){    
     const [listedPokemons, setListedPokemons] = useState([]);
-    const handleList = () => setListedPokemons([...listedPokemons, 
-        { nome: pokemonName, imagem: pokemonImage, hp: pokemonHp,
-        attack: pokemonAttack,
-        defense: pokemonDefense,
-    }]);
 
-    
     const [inputText, setInputText] = useState('');
     const handleSearch = (e) => setInputText(e.target.value);
-    
-    const [search, setSearch] = useState(true);
-    const changePokemon = () => {
-        setSearch(!search)
-    }
-    useEffect(()=>{
-        api.get(inputText.toLowerCase().trim()).then(({ data }) => {
-            setPokemonImage(data.sprites.front_default)
-            setPokemonName(data.name)
-            setPokemonHp(data.stats[0].base_stat)         
-            setPokemonAttack(data.stats[1].base_stat);
-            setPokemonDefense(data.stats[2].base_stat);
-            handleList();
-        })
-    }, [search])
-    
-    console.log(listedPokemons);
 
+    
+    async function getResult() {
+        try{
+            let r = await showPokemons.showPokemons(inputText);
+            setListedPokemons([...listedPokemons, r])
+        }catch(err){
+            console.log(err.message);
+        }
+    }
     return(
         <StyledHome>
             <div className='main'>
@@ -73,18 +51,20 @@ export default function Home(){
                     <div className='src-bar'>
                         <div className='src-icon'><img src={lupa}/></div>
                         <input type='text' onChange={handleSearch} value={inputText}></input>
-                        <button onClick={changePokemon}> BUSCAR </button>
+                        <button onClick={getResult}> BUSCAR </button>
                     </div>
                 </div>     
-                    {listedPokemons && 
-                        <Pokemons
-                            pokemonImage = {pokemonImage}
-                            pokemonName = {pokemonName}
-                            pokemonHp = {pokemonHp}
-                            pokemonAttack = {pokemonAttack}
-                            pokemonDefense = {pokemonDefense}
-                        />
-                    }
+                    {listedPokemons.map((item)=>{
+                        return(
+                            <ListPokemon
+                            pokemonImage = {item.sprites.front_default}
+                            pokemonName = {item.name}
+                            pokemonHp = {item.stats[0].base_stat}
+                            pokemonAttack = {item.stats[1].base_stat}
+                            pokemonDefense = {item.stats[2].base_stat}
+                            />
+                        )
+                    })}
             </div>
         </StyledHome>    
     );
