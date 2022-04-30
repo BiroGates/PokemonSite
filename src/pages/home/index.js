@@ -20,20 +20,22 @@ const showPokemons = new Api();
 
 
 export default function Home(){    
-    const [listedPokemons, setListedPokemons] = useState([]);
+    // Getting pokemon's stats
+    const [pokemonStats, setPokemonStats] = useState([]);
 
     const [inputText, setInputText] = useState('');
     const handleSearch = (e) => setInputText(e.target.value);
 
     
-    async function getResult() {
-        try{
-            let r = await showPokemons.showPokemons(inputText);
-            setListedPokemons([...listedPokemons, r])
-        }catch(err){
-            console.log(err.message);
-        }
+    // Getting All the endpoints
+    async function getPokemonStats(){
+        let endpoints = await showPokemons.getAllPokemons(inputText)
+        setPokemonStats(endpoints);
     }
+
+    useEffect(()=>{
+        getPokemonStats();
+    }, [inputText])
     return(
         <StyledHome>
             <div className='main'>
@@ -51,19 +53,19 @@ export default function Home(){
                     <div className='src-bar'>
                         <div className='src-icon'><img src={lupa}/></div>
                         <input type='text' onChange={handleSearch} value={inputText}></input>
-                        <button onClick={getResult}> BUSCAR </button>
+                        <button> BUSCAR </button>
                     </div>
                 </div>     
-                    {listedPokemons.map((item)=>{
+                    {pokemonStats.map((item) => {
                         return(
                             <ListPokemon
-                            pokemonImage = {item.sprites.front_default}
-                            pokemonName = {item.name}
-                            pokemonHp = {item.stats[0].base_stat}
-                            pokemonAttack = {item.stats[1].base_stat}
-                            pokemonDefense = {item.stats[2].base_stat}
+                                pokemonImage={item.data.sprites.front_default}
+                                pokemonName={item.data.name}
+                                pokemonHp={item.data.stats[0].base_stat}
+                                pokemonAttack={item.data.stats[1].base_stat}
+                                pokemonDefense={item.data.stats[2].base_stat}
                             />
-                        )
+                        );
                     })}
             </div>
         </StyledHome>    
