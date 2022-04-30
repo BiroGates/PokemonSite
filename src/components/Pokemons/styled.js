@@ -4,7 +4,7 @@ import styled from "styled-components";
 import font1 from '../../assets/fonts/Pokemon_Solid.ttf'
 import font2 from '../../assets/fonts/Poppins-Medium.ttf'
 
-const styledPokemon = styled.div `
+const StyledPokemon = styled.div `
     @font-face {
         font-family: 'poke1';
         src: url(${font1});
@@ -15,13 +15,24 @@ const styledPokemon = styled.div `
         src: url(${font2});
     }
     
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 25px;
+
     .pokemons{
+        border: 1px solid black;
+        
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-evenly;
         align-items: center;
         flex-direction: row;
 
-        width: auto;
+        background-color: #F7F7F7;
+
+        width: 50%;
         height: 150px;
     }
 
@@ -68,4 +79,4 @@ const styledPokemon = styled.div `
 
 `
 
-export { styledPokemon }
+export { StyledPokemon }

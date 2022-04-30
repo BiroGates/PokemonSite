@@ -15,7 +15,6 @@ const StyledHome = styled.div `
         src: url(${font2});
     }
 
-
     .main{
         width: 100%;
         height: auto;
@@ -101,6 +100,7 @@ const StyledHome = styled.div `
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
 
         width: 100%;
         height: 180px;
@@ -142,6 +142,19 @@ const StyledHome = styled.div `
         width: 100%;
         height: 100%;
     }
+
+    .buttons{
+        width: 45%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        margin-top: 15px;
+
+        font-family: 'font1';
+
+    }
+
     /* END OF SEARCHBAR*/
 
     /* START OF SHOWPOKEMONS*/

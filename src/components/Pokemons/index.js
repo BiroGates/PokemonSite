@@ -1,10 +1,10 @@
-import  { styledPokemon }  from './styled'
+import  { StyledPokemon }  from './styled'
 
 
 
 export default function ListPokemon({ pokemonImage, pokemonName, pokemonHp, pokemonAttack, pokemonDefense }){
     return (
-        <styledPokemon>
+        <StyledPokemon>
             <div className='pokemons'> 
                         {pokemonImage && 
                             <div className='pokemon-img'> <img src={pokemonImage} /> </div>
@@ -16,6 +16,6 @@ export default function ListPokemon({ pokemonImage, pokemonName, pokemonHp, poke
                             <div className='attack'> DEFENSE: { pokemonDefense } </div>
                         </div>
             </div>
-        </styledPokemon>
+        </StyledPokemon>
     )
 }

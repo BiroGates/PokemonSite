@@ -4,6 +4,9 @@ import { StyledHome } from './styled'
 //Components
 import ListPokemon from '../../components/Pokemons/index'
 
+// Styled Components
+import { Button } from '../../components/styled/Button.js';
+
 // Images
 import pokedex from '../../assets/images/pokedex.jpg';
 import pokeBola from '../../assets/images/pokeBola.png'
@@ -15,6 +18,7 @@ import { useEffect } from 'react';
 
 // Api
 import Api from '../../services/Api';
+import { type } from '@testing-library/user-event/dist/type';
 //import api from '../../services/Api';
 const showPokemons = new Api();
 
@@ -23,19 +27,21 @@ export default function Home(){
     // Getting pokemon's stats
     const [pokemonStats, setPokemonStats] = useState([]);
 
+    // Change the input's value field
     const [inputText, setInputText] = useState('');
     const handleSearch = (e) => setInputText(e.target.value);
 
-    
     // Getting All the endpoints
     async function getPokemonStats(){
         let endpoints = await showPokemons.getAllPokemons(inputText)
         setPokemonStats(endpoints);
     }
 
+    // Getting all the data from the API
     useEffect(()=>{
         getPokemonStats();
-    }, [inputText])
+    }, [])
+    
     return(
         <StyledHome>
             <div className='main'>
@@ -53,19 +59,23 @@ export default function Home(){
                     <div className='src-bar'>
                         <div className='src-icon'><img src={lupa}/></div>
                         <input type='text' onChange={handleSearch} value={inputText}></input>
-                        <button> BUSCAR </button>
+                    </div>
+                    <div className='buttons'>
+                        <Button> BUSCAR </Button>
                     </div>
                 </div>     
                     {pokemonStats.map((item) => {
-                        return(
-                            <ListPokemon
-                                pokemonImage={item.data.sprites.front_default}
-                                pokemonName={item.data.name}
-                                pokemonHp={item.data.stats[0].base_stat}
-                                pokemonAttack={item.data.stats[1].base_stat}
-                                pokemonDefense={item.data.stats[2].base_stat}
-                            />
-                        );
+                        if(item.data.name.includes(inputText)){
+                            return(
+                                <ListPokemon
+                                    pokemonImage={item.data.sprites.front_default}
+                                    pokemonName={item.data.name}
+                                    pokemonHp={item.data.stats[0].base_stat}
+                                    pokemonAttack={item.data.stats[1].base_stat}
+                                    pokemonDefense={item.data.stats[2].base_stat}
+                                />
+                            );
+                        }
                     })}
             </div>
         </StyledHome>    
