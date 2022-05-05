@@ -1,5 +1,9 @@
-// Styled Components
-import { StyledHome } from './styled'
+// Framer Motion
+import { AnimateSharedLayout } from 'framer-motion';
+import { motion } from 'framer-motion';
+
+//React Things
+import LoadingBar from 'react-top-loading-bar';
 
 //Components
 import ListPokemon from '../../components/Pokemons/index'
@@ -7,6 +11,7 @@ import NotFound from '../../components/NotFound';
 
 // Styled Components
 import { Button } from '../../components/styled/Button.js';
+import { StyledHome } from './styled'
 
 // Images
 import pikachu from '../../assets/images/pikachu.png';
@@ -17,16 +22,13 @@ import { useEffect } from 'react';
 
 // Api
 import Api from '../../services/Api';
-//import api from '../../services/Api';
 const showPokemons = new Api();
 
 
 export default function Home(){    
-    // Showing the NotFound Components
-    const [found, setFound] = useState(true);
-    const handleFound = () => setFound(false);
-
-
+    //Loading Bar
+    const [progress, setProgress] = useState(0);
+    
     // Getting pokemon's stats
     const [pokemonStats, setPokemonStats] = useState([]);
 
@@ -36,17 +38,24 @@ export default function Home(){
 
     // Getting All the endpoints
     async function getPokemonStats(){
-        let endpoints = await showPokemons.getAllPokemons(inputText)
+        let endpoints = await showPokemons.getAllPokemons(setProgress, progress)
         setPokemonStats(endpoints);
     }
 
     // Getting all the data from the API
     useEffect(()=>{
         getPokemonStats();
-    }, [])
+    },[])
+
+    console.log(pokemonStats);
 
     return(
         <StyledHome>
+            <LoadingBar
+                color='#f11946'
+                progress= {progress}
+                onLoaderFinished={() => setProgress(0)}
+            />
             <div className='main'>
                 <div className='fx-one'>
                     <div className='src-bar'>
@@ -57,14 +66,16 @@ export default function Home(){
                 <div className='fx-two'>
                     <div className='pokemons-container'>
                         {pokemonStats.map((item) => {
-                            if(item.data.name.includes(inputText)){
+                            if(item.data.name.includes(inputText.toLowerCase().trim())){
                                 return(
-                                    <ListPokemon
-                                        pokemonImage={item.data.sprites.front_default}
+                                    <ListPokemon                                        
+                                        id={item.data.id}
+                                        pokemonImage={item.data.sprites.other["official-artwork"].front_default}
                                         pokemonName={item.data.name}
                                         pokemonHp={item.data.stats[0].base_stat}
-                                        pokemonAttack={item.data.stats[1].base_stat}
-                                        pokemonDefense={item.data.stats[2].base_stat}
+                                        stats={item.data.stats}
+                                        type={item.data.types[0].type.name}
+                                        
                                     />
                                 )
                             }

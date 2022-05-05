@@ -54,6 +54,7 @@ const StyledHome = styled.div `
     
         font-size: 1em;
         font-family: 'font1';
+        border: none ;
     }
 
     .src-bar input:focus{

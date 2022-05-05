@@ -15,6 +15,11 @@ const StyledPokemon = styled.div `
         src: url(${font2});
     }
 
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+
     .card{
         width: 250px;
         height: 300px;
@@ -40,14 +45,19 @@ const StyledPokemon = styled.div `
         width: 150px;
         height: 150px;
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row ;
+
         border-radius: 100%;
 
         background-color: white;
     }
 
     .card-img img{
-        width: 100%;
-        height: 100%;
+        width: 70%;
+        height: 70%;
     }
     
     .card-name{
@@ -59,6 +69,7 @@ const StyledPokemon = styled.div `
     .card-type{
         font-size: 12px;
         font-family: 'Poppins';
+        text-transform: capitalize;
     }
 
 `
