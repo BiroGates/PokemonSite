@@ -23,191 +23,78 @@ const StyledHome = styled.div `
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        background-color: white;
     }
-
-    /* START OF INTRODUCTION*/
+/*==========================START OF FX-ONE==================================*/
     .fx-one{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-
         width: 100%;
-        height: 500px;
+        height: 350px;
 
-        background-color: white;
-    }
-
-    .poke-image{
-        display: flex;
-        align-self: center;
-        justify-content: center;
-
-        width: auto;
-        height: 300px;
-
-    }
-    
-    .poke-title{
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
-
-        width: 300px;
-        height: 300px;
-
-        background-color: white;
-    }
-
-    .poke-text{
-        width: 100%;
-        height: 150px;
-
-        font-size: 3em;
-        font-family: 'poke1';
-        letter-spacing: 4px;
-        color: black;
-    }
-    .poke-phrase{
-        width: 100%;
-        height: 150px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 1.2em;
-        font-family: 'font1';
-        color: black;
-    }
-    
-    .poke-ball{
-        width: 100px;
-        height: 100px;
-    }
-
-    .poke-ball img{
-        width: 100%;
-        height: 100%;
-    }
-    /* END OF INTRODUCTION*/
-
-    /* START OF SEARCHBAR*/
-    .fx-two{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-
-        width: 100%;
-        height: 180px;
     }
 
     .src-bar{
-        width: 50%;
-        height: 50px;
-    
+        width: 320px;
+        height: 220px;
+
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;    
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
     }
 
     .src-bar input{
-        width: 80%;
-        height: 75%;
-        
-        padding-left: 20px;
+        width: 320px;
+        height: 30px;
 
-        border-radius: 15px ;
-        border: none;
-        
-        background-color: red;
-        
-        font-size: 1.2em;
-        color: white;
+        border-radius: 50px;
+        padding: 10px 20px;
+    
+        font-size: 1em;
+        font-family: 'font1';
     }
+
     .src-bar input:focus{
         outline: none;
     }
 
-    .src-icon{
-        width: 40px;
-        height: 40px;
-    }
-    .src-icon img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .buttons{
-        width: 45%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        margin-top: 15px;
-
-        font-family: 'font1';
-
-    }
-
-    /* END OF SEARCHBAR*/
-
-    /* START OF SHOWPOKEMONS*/
-    .pokemons{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: row;
-
-        width: auto;
+    .pikachu-img{
+        width: 150px;
         height: 150px;
     }
-
-    .pokemons .pokemon-img{
-        width : 150px ;
-        height: 150px ;
-    }
-    .pokemons .pokemon-img img{
+    .pikachu-img img{
         width: 100%;
         height: 100%;
     }
+/*=======================END OF FX-ONE=================================*/
 
-    .pokemons .pokemon-stats{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: column;
+/*=======================SRTART OF FX-ONE=================================*/
+    .fx-two{
+        width: 100%;
+        height: auto;
         
-        width: 150px;
-        height: 100%;
-        
-        
-
-    }
-    .pokemons .pokemon-stats .title{
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: row;
+        flex-direction: row ;
+    }
 
-        width: 100%;
+    .pokemons-container{
+        width: 1060px;
         height: auto;
-
-        font-family: 'poke1';
-        font-size: 1.15em;
-        letter-spacing: 2px;
-        text-transform: capitalize;
+    
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
-    .hp, .attack, .defense{
-        font-family: 'font1';
+    .pokemons-container > *{
+        margin-bottom: 15px;
     }
-
 `
 
 export { StyledHome };

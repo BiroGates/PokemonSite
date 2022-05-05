@@ -11,71 +11,55 @@ const StyledPokemon = styled.div `
     }
 
     @font-face {
-        font-family: 'font1' ;
+        font-family: 'Poppins' ;
         src: url(${font2});
     }
+
+    .card{
+        width: 250px;
+        height: 300px;
     
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        border-radius: 15px;
 
-    margin-bottom: 25px;
-
-    .pokemons{
-        border: 1px solid black;
-        
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-direction: row;
-
-        background-color: #F7F7F7;
-
-        width: 50%;
-        height: 150px;
-    }
-
-    .pokemons .pokemon-img{
-        width : 150px ;
-        height: 150px ;
-    }
-    .pokemons .pokemon-img img{
-        width: 100%;
-        height: 100%;
-    }
-
-    .pokemons .pokemon-stats{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: column;
-        
-        width: 150px;
-        height: 100%;
-        
-        
-
-    }
-    .pokemons .pokemon-stats .title{
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: row;
+        flex-direction: column;
 
+        background-color: #95CEA5;
+    
+    }
+
+    .card > *{
+        margin-bottom: 15px;
+    }
+
+
+
+    .card-img{
+        width: 150px;
+        height: 150px;
+
+        border-radius: 100%;
+
+        background-color: white;
+    }
+
+    .card-img img{
         width: 100%;
-        height: auto;
-
-        font-family: 'poke1';
-        font-size: 1.15em;
-        letter-spacing: 2px;
+        height: 100%;
+    }
+    
+    .card-name{
+        font-family: 'Poppins';
+        font-size: 1em;
         text-transform: capitalize;
     }
 
-    .hp, .attack, .defense{
-        font-family: 'font1';
+    .card-type{
+        font-size: 12px;
+        font-family: 'Poppins';
     }
-
 
 `
 

@@ -3,14 +3,13 @@ import { StyledHome } from './styled'
 
 //Components
 import ListPokemon from '../../components/Pokemons/index'
+import NotFound from '../../components/NotFound';
 
 // Styled Components
 import { Button } from '../../components/styled/Button.js';
 
 // Images
-import pokedex from '../../assets/images/pokedex.jpg';
-import pokeBola from '../../assets/images/pokeBola.png'
-import lupa from '../../assets/images/lupa.png'
+import pikachu from '../../assets/images/pikachu.png';
 
 // Hooks
 import { useState } from 'react';
@@ -18,12 +17,16 @@ import { useEffect } from 'react';
 
 // Api
 import Api from '../../services/Api';
-import { type } from '@testing-library/user-event/dist/type';
 //import api from '../../services/Api';
 const showPokemons = new Api();
 
 
 export default function Home(){    
+    // Showing the NotFound Components
+    const [found, setFound] = useState(true);
+    const handleFound = () => setFound(false);
+
+
     // Getting pokemon's stats
     const [pokemonStats, setPokemonStats] = useState([]);
 
@@ -41,42 +44,33 @@ export default function Home(){
     useEffect(()=>{
         getPokemonStats();
     }, [])
-    
+
     return(
         <StyledHome>
             <div className='main'>
                 <div className='fx-one'>
-                    <div className='poke-image'>
-                        <img src={pokedex} />
-                    </div>
-                    <div className='poke-title'>
-                        <div className='poke-text'>Biro's Dex</div>
-                        <div className='poke-phrase'>Sua PokeDex Online e gratuita!</div>
-                        <div className='poke-ball'><img src={pokeBola}/></div>
+                    <div className='src-bar'>
+                        <div className='pikachu-img'><img src={pikachu} alt="" /></div>
+                        <input type="text" name='src-bar' onChange={handleSearch} value={inputText} placeholder='Informe Seu Pokemon' />
                     </div>
                 </div>
                 <div className='fx-two'>
-                    <div className='src-bar'>
-                        <div className='src-icon'><img src={lupa}/></div>
-                        <input type='text' onChange={handleSearch} value={inputText}></input>
+                    <div className='pokemons-container'>
+                        {pokemonStats.map((item) => {
+                            if(item.data.name.includes(inputText)){
+                                return(
+                                    <ListPokemon
+                                        pokemonImage={item.data.sprites.front_default}
+                                        pokemonName={item.data.name}
+                                        pokemonHp={item.data.stats[0].base_stat}
+                                        pokemonAttack={item.data.stats[1].base_stat}
+                                        pokemonDefense={item.data.stats[2].base_stat}
+                                    />
+                                )
+                            }
+                        })}
                     </div>
-                    <div className='buttons'>
-                        <Button> BUSCAR </Button>
-                    </div>
-                </div>     
-                    {pokemonStats.map((item) => {
-                        if(item.data.name.includes(inputText)){
-                            return(
-                                <ListPokemon
-                                    pokemonImage={item.data.sprites.front_default}
-                                    pokemonName={item.data.name}
-                                    pokemonHp={item.data.stats[0].base_stat}
-                                    pokemonAttack={item.data.stats[1].base_stat}
-                                    pokemonDefense={item.data.stats[2].base_stat}
-                                />
-                            );
-                        }
-                    })}
+                </div>
             </div>
         </StyledHome>    
     );
