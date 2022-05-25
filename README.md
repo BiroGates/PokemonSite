@@ -2,7 +2,7 @@
 Site criado com intuito de melhorar meus conhecimentos em REACT e outras ferramentas.
 Algumas das "features" desse projeto são:
   - Loading Bar
-  - Consumindo API
+  - Consumo de API
   - Criando "nested" components
   - Busca de pokemons
  
